@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#123b70"><title>แดชบอร์ดเจ้าหน้าที่ | SchoolCare</title><link rel="stylesheet" href="styles.css"></head><body><div class="topbar"><div class="container topbar-inner"><span class="topbar-dot"></span><span>ระบบบริการงานซ่อมบำรุงภายในโรงเรียน</span><span class="topbar-right">SCHOOL SUPPORT CENTER</span></div></div>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#123b70"><title>แดชบอร์ดเจ้าหน้าที่ | SchoolCare</title><link rel="stylesheet" href="styles.css?v=20261021-v3"></head><body><div class="topbar"><div class="container topbar-inner"><span class="topbar-dot"></span><span>ระบบบริการงานซ่อมบำรุงภายในโรงเรียน</span><span class="topbar-right">SCHOOL SUPPORT CENTER</span></div></div>
 <header class="site-header"><div class="container header-inner">
 <a class="brand" href="index.html"><span class="brand-mark">✦</span><span><strong>SchoolCare</strong><small>ดูแลทุกปัญหาในโรงเรียน</small></span></a>
 <button class="menu-toggle" type="button" aria-label="เปิดเมนู" aria-expanded="false">☰</button>
@@ -10,4 +10,7 @@ document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYe
 const mb=document.querySelector('.menu-toggle'),nv=document.querySelector('.nav');
 if(mb&&nv)mb.addEventListener('click',()=>{const o=nv.classList.toggle('open');mb.setAttribute('aria-expanded',String(o));mb.textContent=o?'✕':'☰'});
 function toast(msg,error=false){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.className='toast show'+(error?' error':'');setTimeout(()=>t.className='toast',3200)}
-</script></body></html>
+</script><script>
+(()=>{const b=document.querySelector('.menu-toggle'),n=document.querySelector('#main-nav');if(b&&n){b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));b.textContent=o?'✕':'☰';});}})();
+</script>
+</body></html>
