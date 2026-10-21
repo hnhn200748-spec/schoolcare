@@ -208,3 +208,59 @@ button:focus-visible,a:focus-visible{outline:3px solid #79b4ff;outline-offset:3p
  .panel-title{font-size:17px}.panel-desc{margin-bottom:16px}
 }
 @media(max-width:390px){.summary-grid{grid-template-columns:1fr}.summary{display:flex;align-items:center;justify-content:space-between}.summary strong{font-size:20px}.page-hero h1{font-size:24px}}
+
+
+/* SchoolCare full-site mobile layout repair */
+:root{--bg:#f3f7fc;--line:#e0e8f2;--shadow:0 12px 30px rgba(16,45,85,.08)}
+body{background:var(--bg);overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+.container{width:min(1120px,calc(100% - 40px))}
+.page-hero{background:linear-gradient(135deg,#102d55 0%,#1f5da5 100%)!important;color:#fff!important}
+.page-hero .breadcrumbs,.page-hero .eyebrow{color:#c2dcff!important}
+.page-hero h1{color:#fff!important}
+.page-hero p{color:#e0ebf8!important}
+.content{min-width:0}
+.panel,.summary,.stat-card,.service-card{min-width:0}
+.toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,.45fr) auto;align-items:stretch;gap:10px}
+.toolbar input,.toolbar .search-input,.toolbar select{width:100%;min-width:0;margin:0}
+.toolbar .btn,.toolbar button{min-width:112px;white-space:nowrap}
+.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+table{width:100%;border-collapse:collapse}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
+.footer-inner{gap:18px}
+input,select,textarea{max-width:100%}
+@media(max-width:720px){
+ .container{width:calc(100% - 32px)}
+ .topbar-right{display:none}
+ .header-inner{min-height:68px}
+ .brand strong{font-size:19px}
+ .brand small{font-size:11px}
+ .page-hero{padding:23px 0 26px}
+ .page-hero h1{font-size:clamp(25px,7vw,32px);line-height:1.35;margin:10px 0}
+ .page-hero p{font-size:14px;line-height:1.8}
+ .content{padding:18px 0 32px}
+ .panel{padding:17px;border-radius:16px}
+ .toolbar{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+ .toolbar input,.toolbar .search-input,.toolbar select,.toolbar .btn,.toolbar button{width:100%;min-width:0;flex:0 0 auto}
+ .summary-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .summary{padding:12px 10px}
+ .summary span{font-size:11px}
+ .summary strong{font-size:23px}
+ .layout{grid-template-columns:minmax(0,1fr)}
+ .field-grid{grid-template-columns:minmax(0,1fr)}
+ .form-actions{display:flex;flex-direction:column}
+ .form-actions .btn,.btn-block{width:100%}
+ .login-shell{grid-template-columns:minmax(0,1fr)}
+ .login-art{min-height:0}
+ .footer-inner{flex-direction:column;align-items:flex-start;padding:24px 0}
+ .footer-note{text-align:left}
+ .table-wrap table{min-width:620px}
+}
+@media(max-width:390px){
+ .container{width:calc(100% - 24px)}
+ .summary-grid{grid-template-columns:1fr}
+ .summary{display:flex;align-items:center;justify-content:space-between}
+ .summary strong{font-size:21px}
+ .panel{padding:14px}
+ .page-hero h1{font-size:25px}
+}
