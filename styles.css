@@ -264,3 +264,22 @@ input,select,textarea{max-width:100%}
  .panel{padding:14px}
  .page-hero h1{font-size:25px}
 }
+
+/* Functional prototype responsive refinements */
+.table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{min-width:620px}
+input,select,textarea{max-width:100%}
+@media(max-width:640px){
+ .container{width:calc(100% - 28px)}
+ .content{padding-top:22px;padding-bottom:28px}
+ .page-hero{padding:26px 0 22px}
+ .page-hero h1{font-size:clamp(27px,7vw,36px);line-height:1.25}
+ .field-grid,.summary-grid,.quick-stats{grid-template-columns:1fr!important}
+ .form-actions{display:grid;grid-template-columns:1fr;gap:10px}
+ .form-actions .btn,.btn{min-height:44px}
+ .panel{padding:18px!important}
+ .login-shell{grid-template-columns:1fr!important}
+ .login-art{min-height:170px!important}
+ .table-wrap table{min-width:620px}
+ .footer-inner{gap:16px;align-items:flex-start}
+}
