@@ -105,24 +105,16 @@
     </div>
   </footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="customer.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const menuButton = document.querySelector('.menu-toggle');
     const nav = document.querySelector('#main-nav');
-    if (menuButton && nav) menuButton.addEventListener('click', () => {
+    menuButton.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       menuButton.setAttribute('aria-expanded', String(open));
       menuButton.textContent = open ? '✕' : '☰';
     });
-    // Read locally saved requests, matching the report/history pages.
-    try {
-      const requests = JSON.parse(localStorage.getItem('schoolcareRequestsV1') || '[]');
-      document.getElementById('statTotal').textContent = requests.length;
-      document.getElementById('statPending').textContent = requests.filter(x =>
-        x.status === 'รอตรวจสอบ' || x.status === 'กำลังดำเนินการ').length;
-      document.getElementById('statDone').textContent = requests.filter(x =>
-        x.status === 'ซ่อมเสร็จแล้ว').length;
-    } catch (_) { /* Keep the default zero values if local storage is unavailable. */ }
   </script>
 </body>
 </html>
