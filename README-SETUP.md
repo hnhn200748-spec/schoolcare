@@ -58,3 +58,15 @@ on conflict (id) do update set role='staff', display_name=excluded.display_name;
 
 ## Realtime (ตัวเลือก)
 ใน Supabase Dashboard ไป Database → Publications → `supabase_realtime` แล้วเปิด `repair_requests` หากยังไม่เปิด เพื่อให้หน้าแดชบอร์ดรีเฟรชเมื่อมีการเปลี่ยนแปลงข้อมูล
+
+
+## หากเว็บขึ้น `Could not find the 'category' column ... in the schema cache`
+แปลว่าตาราง `repair_requests` เดิมใน Supabase ใช้ชื่อคอลัมน์คนละชุดกับเว็บเวอร์ชันนี้ อย่าเพิ่งลบตารางหรือสร้างโปรเจกต์ใหม่ เพราะอาจทำให้คำขอเก่าหาย
+
+1. เปิด Supabase → SQL Editor → New query
+2. เปิดไฟล์ `supabase-migrate-existing-table.sql` ในชุดนี้ แล้วคัดลอกทั้งหมดไปวาง
+3. กด **Run** ให้สำเร็จ
+4. รอสักครู่ แล้วรีโหลดหน้าเว็บ SchoolCare ใหม่ หากยังมี error ให้เปิด Settings/Database หรือ SQL Editor แล้วรัน `NOTIFY pgrst, 'reload schema';`
+5. ตรวจสอบว่าคอลัมน์ `request_number`, `reporter`, `phone`, `category`, `location`, `subject`, `details`, `priority`, `status`, `created_at`, `updated_at` มีอยู่ใน `public.repair_requests`
+
+สคริปต์นี้เปลี่ยนชื่อคอลัมน์เดิมที่ตรงกันและเพิ่มคอลัมน์ที่ขาด โดยไม่ลบแถวคำขอเดิม
