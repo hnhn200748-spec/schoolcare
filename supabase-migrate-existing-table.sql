@@ -52,3 +52,29 @@ create unique index if not exists repair_requests_request_number_unique_idx
 
 notify pgrst, 'reload schema';
 commit;
+
+-- Permissions needed by the public report form. Do not grant public SELECT
+-- on repair_requests: request details must remain private.
+grant usage on schema public to anon, authenticated;
+grant insert on public.repair_requests to anon, authenticated;
+
+do $$
+declare seq_name text;
+begin
+  seq_name := pg_get_serial_sequence('public.repair_requests', 'id');
+  if seq_name is not null then
+    execute format('grant usage, select on sequence %s to anon, authenticated', seq_name);
+  end if;
+end $$;
+
+alter table public.repair_requests enable row level security;
+drop policy if exists "public can submit repair requests" on public.repair_requests;
+create policy "public can submit repair requests"
+on public.repair_requests for insert to anon, authenticated
+with check (
+  length(trim(reporter)) between 2 and 120
+  and length(trim(subject)) between 2 and 180
+  and length(trim(details)) between 2 and 5000
+);
+
+notify pgrst, 'reload schema';

@@ -17,8 +17,8 @@
   if(reportForm){
     reportForm.addEventListener("submit",async e=>{e.preventDefault(); if(!requireBackend()||!reportForm.reportValidity())return; const b=reportForm.querySelector('[type="submit"]'); if(b){b.disabled=true;b.textContent="กำลังส่งคำขอ…";}
       try { const f=new FormData(reportForm); const item={request_number:newNumber(),reporter:String(f.get("reporter")||"").trim(),phone:String(f.get("phone")||"").trim(),category:String(f.get("category")||""),location:String(f.get("location")||"").trim(),subject:String(f.get("subject")||"").trim(),details:String(f.get("details")||"").trim(),priority:String(f.get("priority")||"ปกติ"),status:statuses[0]};
-        const {data,error}=await supabase.from("repair_requests").insert(item).select("request_number").single(); if(error)throw error;
-        const own=JSON.parse(localStorage.getItem("schoolcare-own-requests")||"[]"); own.unshift({number:data.request_number,phone:item.phone}); localStorage.setItem("schoolcare-own-requests",JSON.stringify(own.slice(0,50)));
+        const {error}=await supabase.from("repair_requests").insert(item); if(error)throw error;
+        const own=JSON.parse(localStorage.getItem("schoolcare-own-requests")||"[]"); own.unshift({number:item.request_number,phone:item.phone}); localStorage.setItem("schoolcare-own-requests",JSON.stringify(own.slice(0,50)));
         sessionStorage.setItem("schoolcareLastId",data.request_number); location.href="track.html?number="+encodeURIComponent(data.request_number)+"&phone="+encodeURIComponent(item.phone)+"&created=1";
       } catch(err){console.error(err);toast("ส่งคำขอไม่สำเร็จ: "+(err.message||"ตรวจสอบการตั้งค่าฐานข้อมูล"),true);} finally {if(b){b.disabled=false;b.textContent="ส่งคำขอแจ้งซ่อม →";}}
     });
