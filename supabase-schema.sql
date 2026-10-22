@@ -19,7 +19,7 @@ create table if not exists public.repair_requests (
   subject text not null,
   details text not null,
   priority text not null default 'ปกติ' check (priority in ('ปกติ','เร่งด่วน','เร่งด่วนมาก')),
-  status text not null default 'รอรับเรื่อง' check (status in ('รอรับเรื่อง','กำลังตรวจสอบ','กำลังดำเนินการซ่อม','ซ่อมเสร็จแล้ว','ไม่สามารถซ่อมได้')),
+  status text not null default 'pending' check (status in ('pending','in_progress','completed')),
   assigned_to uuid references public.profiles(id) on delete set null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -81,8 +81,8 @@ create or replace function public.public_repair_stats()
 returns table(total bigint, pending bigint, done bigint)
 language sql security definer set search_path=public as $$
   select count(*)::bigint,
-    count(*) filter (where status not in ('ซ่อมเสร็จแล้ว','ไม่สามารถซ่อมได้'))::bigint,
-    count(*) filter (where status='ซ่อมเสร็จแล้ว')::bigint
+    count(*) filter (where status <> 'completed')::bigint,
+    count(*) filter (where status='completed')::bigint
   from public.repair_requests;
 $$;
 revoke all on function public.public_repair_stats() from public;
