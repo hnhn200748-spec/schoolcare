@@ -70,3 +70,15 @@ on conflict (id) do update set role='staff', display_name=excluded.display_name;
 5. ตรวจสอบว่าคอลัมน์ `request_number`, `reporter`, `phone`, `category`, `location`, `subject`, `details`, `priority`, `status`, `created_at`, `updated_at` มีอยู่ใน `public.repair_requests`
 
 สคริปต์นี้เปลี่ยนชื่อคอลัมน์เดิมที่ตรงกันและเพิ่มคอลัมน์ที่ขาด โดยไม่ลบแถวคำขอเดิม
+
+
+## แก้ปัญหา `lookup_repair_request ... schema cache`
+
+หากหน้า `track.html` ขึ้นข้อความว่าไม่พบฟังก์ชัน `public.lookup_repair_request`:
+
+1. เปิด Supabase Dashboard ของโปรเจกต์ที่เว็บไซต์เชื่อมต่ออยู่
+2. ไปที่ **SQL Editor** แล้วเลือก **New query**
+3. เปิดไฟล์ `fix-tracking-lookup.sql` ในชุดนี้ คัดลอกทั้งหมดไปวาง แล้วกด **Run**
+4. รอสักครู่ แล้วรีเฟรชหน้า `track.html` และลองค้นหาอีกครั้ง
+
+สคริปต์นี้สร้าง/อัปเดตเฉพาะฟังก์ชันค้นหาและโหลด schema cache ใหม่ ไม่ลบคำขอแจ้งซ่อมเดิม หากยังพบ error ให้ตรวจสอบว่า `repair_requests` มีคอลัมน์ `request_number`, `reporter`, `phone`, `category`, `location`, `subject`, `details`, `priority`, `status`, `created_at` และ `updated_at` และเว็บไซต์กำลังเชื่อมกับ Supabase โปรเจกต์เดียวกับที่รัน SQL
