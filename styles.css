@@ -244,3 +244,13 @@ footer{background:#741321;color:#f7dfe2}.footer-brand .brand-mark{background-col
 @media(prefers-reduced-motion:reduce){.float-bubble,.device-icon{animation:none!important}.brand-mark,.service-icon,.stat-icon,.mini-icon,.device-icon,.float-bubble,.notice-icon{transition:none!important}}
 
 .footer-brand .brand-mark{background:#fff url('phichai-college-logo.png') center/contain no-repeat}
+/* เปลี่ยนสีส่วนยินดีต้อนรับเจ้าหน้าที่ */
+.login-art {
+  background: linear-gradient(
+    145deg,
+    #741321 0%,
+    #a51d30 58%,
+    #d63849 100%
+  ) !important;
+}
+
