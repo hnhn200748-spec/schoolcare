@@ -208,3 +208,12 @@ button:focus-visible,a:focus-visible{outline:3px solid #79b4ff;outline-offset:3p
  .panel-title{font-size:17px}.panel-desc{margin-bottom:16px}
 }
 @media(max-width:390px){.summary-grid{grid-template-columns:1fr}.summary{display:flex;align-items:center;justify-content:space-between}.summary strong{font-size:20px}.page-hero h1{font-size:24px}}
+
+/* Phichai College identity */
+.brand-logo{width:52px;height:52px;object-fit:contain;display:block;flex:0 0 auto}
+.brand{gap:12px}
+.brand strong{font-size:18px;letter-spacing:0;color:#76251b}
+.brand small{font-size:11px;color:#806b67}
+.footer-brand .brand strong{color:#fff}
+.footer-brand .brand small{color:#e6c9c2}
+@media(max-width:600px){.brand-logo{width:43px;height:43px}.brand strong{font-size:15px}.brand small{font-size:10px}}
