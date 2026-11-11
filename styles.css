@@ -209,11 +209,38 @@ button:focus-visible,a:focus-visible{outline:3px solid #79b4ff;outline-offset:3p
 }
 @media(max-width:390px){.summary-grid{grid-template-columns:1fr}.summary{display:flex;align-items:center;justify-content:space-between}.summary strong{font-size:20px}.page-hero h1{font-size:24px}}
 
-/* Phichai College identity */
-.brand-logo{width:52px;height:52px;object-fit:contain;display:block;flex:0 0 auto}
-.brand{gap:12px}
-.brand strong{font-size:18px;letter-spacing:0;color:#76251b}
-.brand small{font-size:11px;color:#806b67}
-.footer-brand .brand strong{color:#fff}
-.footer-brand .brand small{color:#e6c9c2}
-@media(max-width:600px){.brand-logo{width:43px;height:43px}.brand strong{font-size:15px}.brand small{font-size:10px}}
+/* Phichai Industrial and Community Education College: red & white identity */
+:root{--navy:#8f1725;--blue:#b51f32;--blue2:#d52b40;--sky:#fff0f1;--ink:#302126;--muted:#806d72;--line:#f0dfe2;--bg:#fff8f8;--green:#27845b;--orange:#b76a24;--shadow:0 14px 40px rgba(120,20,35,.08)}
+body{background:#fffafa;color:var(--ink)}
+.topbar{background:#771321;color:#ffe9eb}.topbar-dot{background:#fff}
+.site-header{background:#fff;border-bottom:1px solid #f0dfe2}
+.brand-mark{background:#fff url('phichai-college-logo.png') center/contain no-repeat;border:1px solid #ead5d8;box-shadow:0 5px 14px #7b16201a;font-size:0;overflow:hidden}
+.brand strong{color:#8f1725}.brand small{color:#8a7075}
+.nav-link{color:#72565c}.nav-link:hover,.nav-link.active{color:#a3192b;background:#fff0f1}
+.nav-login{background:#941a2a;color:#fff!important}.nav-login:hover{background:#741321;color:#fff!important}
+.hero,.page-hero{background:linear-gradient(125deg,#741321 0%,#a51d30 58%,#d63849 100%)}
+.hero:before{background:radial-gradient(circle,#ffffff18 1px,transparent 1.5px)}
+.eyebrow,.section-kicker{color:#bd3345}.hero .eyebrow,.page-hero .eyebrow{color:#ffdce0}
+.hero h1 span{color:#ffe1e4}.btn-primary{background:linear-gradient(135deg,#c3263b,#8f1725);box-shadow:0 7px 18px #941a2a26}.btn-primary:hover{background:linear-gradient(135deg,#a91d30,#741321)}
+.btn-secondary{background:#fff0f1;color:#8f1725;border-color:#f2d4d9}.btn-outline{border-color:#d9b7bd;color:#8f1725}.btn-outline:hover{background:#fff0f1}
+.section-intro h2,.service-card h3{color:#7f1725}.service-link{color:#a51d30}
+.stat-icon.blue,.icon-blue{background:#fff0f1;color:#a51d30}.icon-purple{background:#fff0f1;color:#b52b40}.icon-green{background:#edf8f1;color:#27845b}
+.service-card:hover{border-color:#e5aeb7;box-shadow:0 16px 35px #941a2a16}
+footer{background:#741321;color:#f7dfe2}.footer-brand .brand-mark{background-color:#fff}.footer-brand strong{color:#fff}.footer-brand small{color:#f0cbd0}.footer-note{color:#e7b7be}
+.toast{background:#741321}.toast.error{background:#a51d30}
+.page-hero .breadcrumbs{color:#f5cbd1}.page-hero p{color:#ffe4e7}
+.field input:focus,.field select:focus,.field textarea:focus,.search-input:focus,.toolbar select:focus,.toolbar input:focus{border-color:#d66b79;box-shadow:0 0 0 3px #c3263b18}
+.status.pending{background:#fff1d9;color:#9a5c13}.status.progress{background:#fff0f1;color:#a51d30}.status.done{background:#e8f7ee;color:#27845b}
+.photo-preview-wrap{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-top:12px}.photo-preview-wrap[hidden]{display:none}.photo-preview-wrap img{width:min(100%,260px);max-height:220px;object-fit:contain;border:1px solid #ead5d8;border-radius:13px;background:#fff;padding:4px}.photo-field input[type=file]{padding:10px;background:#fffafa;border-style:dashed}.request-photo{margin:14px 0}.request-photo img,.staff-request-photo{display:block;max-width:100%;width:min(100%,520px);max-height:360px;object-fit:contain;border-radius:14px;border:1px solid #ead5d8;background:#fff;padding:5px}.staff-request-photo{margin-top:10px}
+/* Subtle motion for interface icons; respects reduced-motion preferences. */
+.brand-mark,.service-icon,.stat-icon,.mini-icon,.device-icon,.float-bubble,.notice-icon{transition:transform .25s ease,box-shadow .25s ease}
+.service-card:hover .service-icon,.service-card:focus-visible .service-icon{transform:translateY(-4px) rotate(-5deg) scale(1.06)}
+.stat-card:hover .stat-icon{transform:rotate(7deg) scale(1.08)}
+.float-bubble{animation:icon-float 3.6s ease-in-out infinite}.bubble-tools{animation-delay:-1.7s}
+.device-icon{animation:icon-pulse 2.8s ease-in-out infinite}
+@keyframes icon-float{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes icon-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@media(hover:hover){.brand:hover .brand-mark{transform:rotate(-5deg) scale(1.04)}}
+@media(prefers-reduced-motion:reduce){.float-bubble,.device-icon{animation:none!important}.brand-mark,.service-icon,.stat-icon,.mini-icon,.device-icon,.float-bubble,.notice-icon{transition:none!important}}
+
+.footer-brand .brand-mark{background:#fff url('phichai-college-logo.png') center/contain no-repeat}

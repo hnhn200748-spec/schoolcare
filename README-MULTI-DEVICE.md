@@ -1,15 +1,15 @@
-# SchoolCare — ใช้งานจากหลายเครื่อง
+# วิทยาลัยการอาชีพพิชัย — ใช้งานจากหลายเครื่อง
 
 ชุดนี้เชื่อมฐานข้อมูลกลาง Supabase ไว้แล้วใน `supabase-config.js` จึงสามารถให้หลายเครื่องใช้งานข้อมูลคำขอชุดเดียวกันได้ **เมื่อทุกเครื่องเปิดเว็บไซต์จาก URL เดียวกัน** และมีการตั้งค่า Supabase ถูกต้อง
 
 ## วิธีเปิดให้เครื่องอื่นใช้งาน (แนะนำ: GitHub Pages)
 
 1. แตกไฟล์ ZIP นี้ในคอมพิวเตอร์
-2. เข้าสู่ GitHub และสร้าง repository ใหม่ เช่น `schoolcare`
+2. เข้าสู่ GitHub และสร้าง repository ใหม่ เช่น `phichai-college-repair`
 3. อัปโหลดไฟล์ทั้งหมดในโฟลเดอร์นี้ไปไว้ที่ root ของ repository (ตำแหน่งเดียวกับ `index.html`) แล้วกด Commit
 4. เปิด repository → **Settings → Pages**
 5. ในส่วน Build and deployment เลือก **Deploy from a branch**, เลือก branch `main` และ folder `/ (root)` แล้วกด Save
-6. รอให้ GitHub Pages แสดง URL เว็บไซต์ เช่น `https://ชื่อผู้ใช้.github.io/schoolcare/`
+6. รอให้ GitHub Pages แสดง URL เว็บไซต์ เช่น `https://ชื่อผู้ใช้.github.io/phichai-college-repair/`
 7. เปิด URL นั้นจากมือถือหรือคอมพิวเตอร์เครื่องอื่น แล้วลองแจ้งซ่อม/ติดตามคำขอ
 
 > อย่าเปิดไฟล์ `index.html` โดยตรงด้วยการดับเบิลคลิก (`file://`) เพราะบางเบราว์เซอร์อาจบล็อกการทำงานหรือการเชื่อมต่อ ควรเปิดผ่านเว็บไซต์ที่เผยแพร่แล้ว

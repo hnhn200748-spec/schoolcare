@@ -1,4 +1,4 @@
-# SchoolCare — ระบบแจ้งซ่อมเชื่อมฐานข้อมูลกลาง
+# วิทยาลัยการอาชีพพิชัย — ระบบแจ้งซ่อมเชื่อมฐานข้อมูลกลาง
 
 ชุดนี้ปรับจากไฟล์ต้นฉบับให้ทุกหน้าทำงานกับฐานข้อมูล PostgreSQL กลางบน Supabase แทน localStorage สำหรับข้อมูลคำขอ
 
@@ -10,6 +10,8 @@
 - แดชบอร์ดเจ้าหน้าที่ดูคำขอทั้งหมด เปลี่ยนสถานะ และเปิดรายละเอียด
 - สถิติหน้าแรกจากฐานข้อมูลกลาง
 - ส่งออก CSV ของประวัติที่เรียกดูได้
+- แนบรูปอุปกรณ์ที่มีปัญหาจากกล้องหรือคลังภาพ (JPG/PNG/WEBP ไม่เกิน 5 MB) พร้อมตัวอย่างก่อนส่ง และแสดงภาพในหน้าติดตาม/รายละเอียดเจ้าหน้าที่
+- ธีมสีแดง-ขาวและตราวิทยาลัยการอาชีพพิชัย พร้อมเอฟเฟกต์ไอคอนแบบเคลื่อนไหว
 - RLS ป้องกันไม่ให้ผู้ใช้ทั่วไปอ่านคำขอทั้งหมด
 
 ## ขั้นตอนเปิดใช้งานจริง
@@ -20,7 +22,12 @@
 ### 2. สร้างตารางและสิทธิ์
 คัดลอกไฟล์ `supabase-schema.sql` ทั้งหมดไปรันใน SQL Editor ให้สำเร็จ ตรวจสอบว่าไม่มี error
 
-### 3. ตั้งค่าเชื่อมต่อ
+### 3. เปิดใช้ระบบแนบรูปภาพ
+หลังจากรัน schema เดิมและตั้งค่าฐานข้อมูลแล้ว ให้เปิด SQL Editor แล้วรันไฟล์ `supabase-migrate-photos.sql` เพื่อเพิ่มคอลัมน์รูปภาพ สร้าง Storage bucket `repair-photos` และตั้งค่าสิทธิ์อัปโหลด/อ่านรูปภาพ
+
+> หมายเหตุ: รูปภาพใน bucket นี้เป็น public URL เพื่อให้ผู้แจ้งและเจ้าหน้าที่เปิดดูได้ อย่าแนบรูปที่มีข้อมูลส่วนบุคคลหรือข้อมูลลับ และควรเพิ่ม CAPTCHA/rate limit ก่อนเปิดใช้สาธารณะ
+
+### 4. ตั้งค่าเชื่อมต่อ
 เปิด Project Settings → API แล้วคัดลอก Project URL และ anon/publishable key (ห้ามใช้ service_role/secret key)
 แก้ `supabase-config.js`:
 ```js
@@ -28,7 +35,7 @@ window.SCHOOLCARE_SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
 window.SCHOOLCARE_SUPABASE_ANON_KEY = "YOUR_ANON_OR_PUBLISHABLE_KEY";
 ```
 
-### 4. สร้างบัญชีเจ้าหน้าที่
+### 5. สร้างบัญชีเจ้าหน้าที่
 ใน Supabase Dashboard → Authentication → Users ให้สร้างผู้ใช้ด้วยอีเมลและรหัสผ่านที่ต้องการ จากนั้นรัน SQL โดยแทน UUID ด้วย User UID ที่เห็นในหน้า Users:
 ```sql
 insert into public.profiles (id, display_name, role)
@@ -37,10 +44,10 @@ on conflict (id) do update set role='staff', display_name=excluded.display_name;
 ```
 หน้า `login.html` ใช้อีเมลในช่องชื่อผู้ใช้และรหัสผ่านของ Supabase Auth ไม่ใช้บัญชีทดลอง hard-coded อีกต่อไป
 
-### 5. อัปโหลดไป GitHub Pages
+### 6. อัปโหลดไป GitHub Pages
 อัปโหลดไฟล์ทั้งหมดในโฟลเดอร์นี้ไปยังตำแหน่งเดียวกับ `index.html` ใน repository โดยคงชื่อและโครงสร้างไฟล์เดิม แล้ว Commit changes
 
-### 6. ทดสอบก่อนใช้งานจริง
+### 7. ทดสอบก่อนใช้งานจริง
 1. เปิด `report.html` ส่งคำขอทดสอบพร้อมเบอร์โทร
 2. จดเลขคำขอ
 3. เปิด `track.html` กรอกเลขคำขอและเบอร์เดิม ต้องเห็นสถานะ
@@ -66,7 +73,7 @@ on conflict (id) do update set role='staff', display_name=excluded.display_name;
 1. เปิด Supabase → SQL Editor → New query
 2. เปิดไฟล์ `supabase-migrate-existing-table.sql` ในชุดนี้ แล้วคัดลอกทั้งหมดไปวาง
 3. กด **Run** ให้สำเร็จ
-4. รอสักครู่ แล้วรีโหลดหน้าเว็บ SchoolCare ใหม่ หากยังมี error ให้เปิด Settings/Database หรือ SQL Editor แล้วรัน `NOTIFY pgrst, 'reload schema';`
+4. รอสักครู่ แล้วรีโหลดหน้าเว็บ วิทยาลัยการอาชีพพิชัย ใหม่ หากยังมี error ให้เปิด Settings/Database หรือ SQL Editor แล้วรัน `NOTIFY pgrst, 'reload schema';`
 5. ตรวจสอบว่าคอลัมน์ `request_number`, `reporter`, `phone`, `category`, `location`, `subject`, `details`, `priority`, `status`, `created_at`, `updated_at` มีอยู่ใน `public.repair_requests`
 
 สคริปต์นี้เปลี่ยนชื่อคอลัมน์เดิมที่ตรงกันและเพิ่มคอลัมน์ที่ขาด โดยไม่ลบแถวคำขอเดิม
